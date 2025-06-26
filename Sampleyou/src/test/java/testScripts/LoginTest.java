@@ -1,10 +1,14 @@
 package testScripts;
 
 import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentTest;
+
 import baseClass.LoginBase;
 import pomRepo.LoginPage;
 import utilityMethods.ExtentReport;
@@ -17,9 +21,10 @@ public class LoginTest {
 		
 		WebDriver driver = new ChromeDriver();
 		
-		ExtentReport report = new ExtentReport();
-				report.generateReport();
+		ExtentTest test;
 		
+	 test  = ExtentReport.createTest("Login REPORT");
+	 
 	
 		LoginBase base = new LoginBase();
 		TakeScreenShot ss = new TakeScreenShot();

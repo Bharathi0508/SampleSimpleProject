@@ -6,14 +6,33 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 public class ExtentReport {
 	
-	public void generateReport() {
-		
-		ExtentSparkReporter reporter = new ExtentSparkReporter("./ExtentReportlog");
-		ExtentReports genReport = new ExtentReports();
-		genReport.attachReporter(reporter);
-		
-		ExtentTest test = genReport.createTest("LoginTest", "Checks the login page with valid UN and Pwd");
-		
+	    private static ExtentReports extent;
+	    private static ExtentTest test;
+
+	    public static ExtentReports getExtentReports() {
+	        if (extent == null) {
+	            ExtentSparkReporter sparkReporter = new ExtentSparkReporter("./test-output/ExtentReport.html");
+	            extent = new ExtentReports();
+	            extent.attachReporter(sparkReporter);
+
+	            extent.setSystemInfo("OS", "Windows");
+	            extent.setSystemInfo("Tester", "Bharathi");
+	        }
+	        return extent;
+	    }
+
+	    public static ExtentTest createTest(String testName) {
+	        test = getExtentReports().createTest(testName);
+	        return test;
+	    }
+
+	    public static void flushReport() {
+	        if (extent != null) {
+	            extent.flush();
+	        }
+	    }
 	}
 
-}
+	
+
+
